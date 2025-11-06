@@ -14,9 +14,22 @@ export default defineConfig(({ command }) => ({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          animations: ['framer-motion'],
+        },
+      },
+    },
   },
   server: {
     port: 3000,
+    open: true,
+    host: true,
+  },
+  preview: {
+    port: 4173,
     open: true,
   },
 }))
