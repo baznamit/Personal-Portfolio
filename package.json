@@ -1,0 +1,47 @@
+{
+  "name": "namit-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Modern portfolio website for Namit Pratap Singh",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css,md}\"",
+    "type-check": "tsc --noEmit",
+    "deploy": "npm run build && gh-pages -d dist",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.552.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-intersection-observer": "^10.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.26",
+    "@types/react-dom": "^18.3.7",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "gh-pages": "^6.1.0",
+    "globals": "^15.1.0",
+    "postcss": "^8.4.32",
+    "prettier": "^3.1.1",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5.2.2",
+    "vite": "^6.0.10"
+  }
+}

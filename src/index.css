@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-light text-gray-800;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .heading-primary {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-heading text-primary;
+  }
+  
+  .heading-secondary {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary;
+  }
+  
+  .text-body {
+    @apply font-body text-gray-700 leading-relaxed;
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6;
+  }
+  
+  .skill-tag {
+    @apply inline-block bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm font-medium;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  
+  .glass-effect {
+    @apply bg-white bg-opacity-80 backdrop-blur-sm;
+  }
+}
