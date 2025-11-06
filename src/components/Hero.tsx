@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
+import { getAssetPath } from '../utils/assets'
 
 const Hero = () => {
   return (
@@ -10,7 +11,7 @@ const Hero = () => {
         transition={{ duration: 6, repeat: Infinity }}
         className="absolute top-20 left-10 opacity-30"
       >
-        <img src="/Pics/cloud.png" alt="" className="w-32 h-20" />
+        <img src={getAssetPath("Pics/cloud.png")} alt="" className="w-32 h-20" />
       </motion.div>
       
       <motion.div
@@ -18,7 +19,7 @@ const Hero = () => {
         transition={{ duration: 8, repeat: Infinity }}
         className="absolute top-32 right-10 opacity-30"
       >
-        <img src="/Pics/cloud.png" alt="" className="w-24 h-16" />
+        <img src={getAssetPath("Pics/cloud.png")} alt="" className="w-24 h-16" />
       </motion.div>
 
       <div className="container-max section-padding text-center z-10">
@@ -77,7 +78,7 @@ const Hero = () => {
           className="mt-16 relative"
         >
           <img
-            src="/Pics/mountain.png"
+            src={getAssetPath("Pics/mountain.png")}
             alt="Mountain illustration"
             className="w-full max-w-4xl mx-auto h-auto"
           />

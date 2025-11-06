@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { ExternalLink, Github } from 'lucide-react'
+import { getAssetPath } from '../utils/assets'
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -12,7 +13,7 @@ const Projects = () => {
     {
       title: "Portfolio Website",
       description: "A modern, responsive portfolio website built with React and TypeScript",
-      image: "/Pics/project1.jpg",
+      image: getAssetPath("Pics/project1.jpg"),
       technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
       liveUrl: "#",
       githubUrl: "https://github.com/baznamit/my-site"
@@ -20,7 +21,7 @@ const Projects = () => {
     {
       title: "E-Commerce Platform",
       description: "Full-stack e-commerce solution with payment integration",
-      image: "/Pics/project2.jpg",
+      image: getAssetPath("Pics/project2.jpg"),
       technologies: ["Next.js", "Node.js", "MongoDB", "Stripe"],
       liveUrl: "#",
       githubUrl: "#"
@@ -28,7 +29,7 @@ const Projects = () => {
     {
       title: "Task Management App",
       description: "Collaborative task management tool with real-time updates",
-      image: "/Pics/project3.jpg",
+      image: getAssetPath("Pics/project3.jpg"),
       technologies: ["Vue.js", "Firebase", "Vuex", "CSS3"],
       liveUrl: "#",
       githubUrl: "#"

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { getAssetPath } from '../utils/assets'
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -30,7 +31,7 @@ const About = () => {
             >
               <div className="relative">
                 <img
-                  src="/Pics/DSC_0386.jpg"
+                  src={getAssetPath("Pics/DSC_0386.jpg")}
                   alt="Namit Pratap Singh"
                   className="w-80 h-80 object-cover rounded-full mx-auto shadow-2xl"
                 />
