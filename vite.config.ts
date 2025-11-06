@@ -9,7 +9,7 @@ export default defineConfig(({ command }) => ({
       '@': '/src',
     },
   },
-  base: command === 'build' ? '/my-site/' : '/',
+  base: command === 'build' ? '/Personal-Portfolio/' : '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
