@@ -17,17 +17,17 @@ const Skills = () => {
     {
       icon: <Globe className="w-8 h-8" />,
       title: "Web Development",
-      skills: ["React", "Next.js", "Vue.js", "HTML5", "CSS3", "Tailwind CSS"]
+      skills: ["React", "Angular 19", "HTML5", "CSS3", "Tailwind CSS"]
     },
     {
       icon: <Database className="w-8 h-8" />,
       title: "Backend & Database",
-      skills: ["Node.js", "Express", "MongoDB", "PostgreSQL", "MySQL", "Firebase"]
+      skills: ["Node.js", "Express", "Java Springboot", "PostgreSQL", "MySQL"]
     },
     {
       icon: <Smartphone className="w-8 h-8" />,
       title: "Tools & Technologies",
-      skills: ["Git", "Docker", "AWS", "Figma", "VS Code", "Linux"]
+      skills: ["Git", "Docker", "AWS", "VS Code", "Linux", "GenAI"]
     }
   ]
 
@@ -88,7 +88,7 @@ const Skills = () => {
               {[
                 { skill: "React & JavaScript", level: 90 },
                 { skill: "Python & Backend", level: 85 },
-                { skill: "UI/UX Design", level: 75 }
+                { skill: "Cloud", level: 75 }
               ].map((item, index) => (
                 <div key={item.skill} className="card">
                   <div className="flex justify-between items-center mb-2">
