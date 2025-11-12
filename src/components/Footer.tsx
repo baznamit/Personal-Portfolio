@@ -1,3 +1,5 @@
+import { getAssetPath } from '../utils/assets'
+
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
@@ -42,11 +44,15 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Connect With Me</h4>
             <div className="flex justify-center md:justify-end space-x-4">
               <a
-                href="mailto:baznamit.github@gmail.com"
+                href="mailto:namit.singh1269@gmail.com"
                 className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
                 aria-label="Email"
               >
-                📧
+                <img 
+                  src={getAssetPath("Pics/gmail-icon.png")} 
+                  alt="Gmail" 
+                  className="w-5 h-5"
+                />
               </a>
               <a
                 href="https://github.com/baznamit"
@@ -55,7 +61,11 @@ const Footer = () => {
                 className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
                 aria-label="GitHub"
               >
-                📁
+                <img 
+                  src={getAssetPath("Pics/github-logo.png")} 
+                  alt="GitHub" 
+                  className="w-5 h-5"
+                />
               </a>
               <a
                 href="https://www.linkedin.com/"
@@ -64,7 +74,11 @@ const Footer = () => {
                 className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
                 aria-label="LinkedIn"
               >
-                💼
+                <img 
+                  src={getAssetPath("Pics/linkedin-logo.png")} 
+                  alt="LinkedIn" 
+                  className="w-5 h-5"
+                />
               </a>
               <a
                 href="https://twitter.com/baznamit1269"
@@ -73,7 +87,11 @@ const Footer = () => {
                 className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
                 aria-label="Twitter"
               >
-                🐦
+                <img 
+                  src={getAssetPath("Pics/twitter-icon.png")} 
+                  alt="Twitter" 
+                  className="w-5 h-5"
+                />
               </a>
             </div>
           </div>

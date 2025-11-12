@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import { getAssetPath } from '../utils/assets'
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -71,8 +72,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-secondary">Email</h4>
-                    <a href="mailto:baznamit.github@gmail.com" className="text-body hover:text-primary transition-colors">
-                      baznamit.github@gmail.com
+                    <a href="mailto:namit.singh1269@gmail.com" className="text-body hover:text-primary transition-colors">
+                      namit.singh1269@gmail.com
                     </a>
                   </div>
                 </div>
@@ -93,7 +94,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-secondary">Location</h4>
-                    <span className="text-body">Remote / India</span>
+                    <span className="text-body">Mumbai, India</span>
                   </div>
                 </div>
               </div>
@@ -103,13 +104,28 @@ const Contact = () => {
                 <h4 className="font-semibold text-secondary mb-4">Follow Me</h4>
                 <div className="flex space-x-4">
                   <a
+                    href="mailto:namit.singh1269@gmail.com"
+                    className="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
+                  >
+                    <span className="sr-only">Gmail</span>
+                    <img 
+                      src={getAssetPath("Pics/gmail-icon.png")} 
+                      alt="Gmail" 
+                      className="w-5 h-5"
+                    />
+                  </a>
+                  <a
                     href="https://github.com/baznamit"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
                   >
                     <span className="sr-only">GitHub</span>
-                    📁
+                    <img 
+                      src={getAssetPath("Pics/github-logo.png")} 
+                      alt="GitHub" 
+                      className="w-5 h-5"
+                    />
                   </a>
                   <a
                     href="https://www.linkedin.com/"
@@ -118,7 +134,11 @@ const Contact = () => {
                     className="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
                   >
                     <span className="sr-only">LinkedIn</span>
-                    💼
+                    <img 
+                      src={getAssetPath("Pics/linkedin-logo.png")} 
+                      alt="LinkedIn" 
+                      className="w-5 h-5"
+                    />
                   </a>
                   <a
                     href="https://twitter.com/baznamit1269"
@@ -127,7 +147,11 @@ const Contact = () => {
                     className="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
                   >
                     <span className="sr-only">Twitter</span>
-                    🐦
+                    <img 
+                      src={getAssetPath("Pics/twitter-icon.png")} 
+                      alt="Twitter" 
+                      className="w-5 h-5"
+                    />
                   </a>
                 </div>
               </div>
