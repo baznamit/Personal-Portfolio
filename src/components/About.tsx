@@ -29,13 +29,15 @@ const About = () => {
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="relative">
-                <img
-                  src={getAssetPath("Pics/DSC_0386.jpg")}
-                  alt="Namit Pratap Singh"
-                  className="w-80 h-80 object-cover rounded-full mx-auto shadow-2xl"
-                />
-                <div className="absolute inset-0 rounded-full border-4 border-primary border-opacity-30"></div>
+              <div className="flex justify-center">
+                <div className="relative w-80 h-80">
+                  <img
+                    src={getAssetPath("Pics/profile-pic.jpg")}
+                    alt="Namit Pratap Singh"
+                    className="w-80 h-80 object-cover rounded-full shadow-2xl"
+                  />
+                  <div className="absolute inset-0 rounded-full border-4 border-primary"></div>
+                </div>
               </div>
             </motion.div>
 
