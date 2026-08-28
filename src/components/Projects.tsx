@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { ExternalLink, Github } from 'lucide-react'
-import { getAssetPath } from '../utils/assets'
+import { Cloud, Database, ExternalLink, Github, Server } from 'lucide-react'
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -11,26 +10,32 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "Portfolio Website",
-      description: "A modern, responsive portfolio website built with React and TypeScript",
-      image: getAssetPath("Pics/project1.jpg"),
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      title: "Order & Inventory API",
+      description: "Backend services for product, order, and inventory workflows with resilient API design.",
+      previewTitle: "Spring Boot Microservices",
+      previewStyle: "from-slate-900 via-cyan-900 to-cyan-700",
+      icon: <Server className="w-8 h-8" />,
+      technologies: ["Java", "Spring Boot", "REST APIs", "Redis", "PostgreSQL"],
       liveUrl: "#",
       githubUrl: "https://github.com/baznamit/my-site"
     },
     {
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with payment integration",
-      image: getAssetPath("Pics/project2.jpg"),
-      technologies: ["Next.js", "Node.js", "MongoDB", "Stripe"],
+      title: "Event-Driven Checkout",
+      description: "Asynchronous checkout pipeline built around reliable events and fault-tolerant processing.",
+      previewTitle: "Kafka + Resilience",
+      previewStyle: "from-blue-900 via-indigo-900 to-slate-800",
+      icon: <Database className="w-8 h-8" />,
+      technologies: ["Apache Kafka", "Resilience4j", "Spring Boot", "JUnit 5", "Mockito"],
       liveUrl: "#",
       githubUrl: "#"
     },
     {
-      title: "Task Management App",
-      description: "Collaborative task management tool with real-time updates",
-      image: getAssetPath("Pics/project3.jpg"),
-      technologies: ["Vue.js", "Firebase", "Vuex", "CSS3"],
+      title: "Cloud-Native Service Platform",
+      description: "Containerized backend deployment setup with observability and CI/CD automation.",
+      previewTitle: "Docker • Kubernetes • CI/CD",
+      previewStyle: "from-emerald-900 via-teal-900 to-cyan-800",
+      icon: <Cloud className="w-8 h-8" />,
+      technologies: ["Docker", "Kubernetes", "Jenkins", "Prometheus", "Grafana"],
       liveUrl: "#",
       githubUrl: "#"
     }
@@ -63,11 +68,16 @@ const Projects = () => {
                 className="card group hover:scale-105 transition-all duration-300"
               >
                 <div className="relative overflow-hidden rounded-lg mb-4">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
+                  <div
+                    className={`w-full h-48 bg-gradient-to-br ${project.previewStyle} text-white flex flex-col items-start justify-between p-5 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+                      {project.icon}
+                    </div>
+                    <p className="text-sm font-semibold tracking-wide text-white/90">
+                      {project.previewTitle}
+                    </p>
+                  </div>
                   <div className="absolute inset-0 bg-primary bg-opacity-0 group-hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center">
                     <div className="flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <a

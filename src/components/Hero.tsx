@@ -45,10 +45,10 @@ const Hero = () => {
             className="space-y-2"
           >
             <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-600 font-body">
-              I'm a <span className="text-secondary font-semibold">Full Stack Developer</span>
+              I'm a <span className="text-secondary font-semibold">Backend-Focused Java Developer</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Passionate about creating beautiful and functional web experiences
+              Building scalable backend systems with Spring Boot, Microservices, REST APIs, and cloud-native tooling
             </p>
           </motion.div>
 

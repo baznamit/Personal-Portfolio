@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Code, Database, Globe, Smartphone } from 'lucide-react'
+import { Cloud, Code, Database, Globe, Server, Wrench } from 'lucide-react'
 
 const Skills = () => {
   const [ref, inView] = useInView({
@@ -12,22 +12,32 @@ const Skills = () => {
     {
       icon: <Code className="w-8 h-8" />,
       title: "Programming Languages",
-      skills: ["JavaScript", "TypeScript", "Python", "C++", "Java", "C"]
+      skills: ["Java", "Python", "JavaScript", "TypeScript", "SQL"]
     },
     {
       icon: <Globe className="w-8 h-8" />,
-      title: "Web Development",
-      skills: ["React", "Angular 19", "HTML5", "CSS3", "Tailwind CSS"]
+      title: "Frontend",
+      skills: ["React.js", "Redux Toolkit", "HTML5", "CSS3", "Bootstrap"]
+    },
+    {
+      icon: <Server className="w-8 h-8" />,
+      title: "Backend & Systems",
+      skills: ["Spring Boot", "Microservices", "REST APIs", "Redis", "Apache Kafka", "Resilience4j"]
+    },
+    {
+      icon: <Cloud className="w-8 h-8" />,
+      title: "Cloud & DevOps",
+      skills: ["AWS (EC2, S3, Lambda)", "Azure PaaS", "Docker", "Kubernetes", "Jenkins", "CI/CD"]
     },
     {
       icon: <Database className="w-8 h-8" />,
-      title: "Backend & Database",
-      skills: ["Node.js", "Express", "Java Springboot", "PostgreSQL", "MySQL"]
+      title: "Databases & Observability",
+      skills: ["PostgreSQL", "MongoDB", "Prometheus", "Grafana"]
     },
     {
-      icon: <Smartphone className="w-8 h-8" />,
-      title: "Tools & Technologies",
-      skills: ["Git", "Docker", "AWS", "VS Code", "Linux", "GenAI"]
+      icon: <Wrench className="w-8 h-8" />,
+      title: "Tools & Testing",
+      skills: ["Git", "Nexus", "JUnit 5", "Mockito", "SonarQube"]
     }
   ]
 
@@ -48,7 +58,7 @@ const Skills = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skillCategories.map((category, index) => (
               <motion.div
                 key={category.title}
@@ -86,9 +96,9 @@ const Skills = () => {
             </h3>
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {[
-                { skill: "React & JavaScript", level: 90 },
-                { skill: "Python & Backend", level: 85 },
-                { skill: "Cloud", level: 75 }
+                { skill: "Java & Spring Boot", level: 92 },
+                { skill: "Microservices & REST APIs", level: 88 },
+                { skill: "Cloud, Docker & Kubernetes", level: 82 }
               ].map((item, index) => (
                 <div key={item.skill} className="card">
                   <div className="flex justify-between items-center mb-2">

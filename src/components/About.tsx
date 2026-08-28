@@ -49,19 +49,19 @@ const About = () => {
             >
               <h3 className="text-2xl font-bold text-secondary">Hello there!</h3>
               <p className="text-body text-lg leading-relaxed">
-                I'm Namit Pratap Singh, a passionate full-stack developer with a love for creating 
-                innovative web solutions. My journey in programming started with curiosity and has 
-                evolved into a deep passion for building meaningful digital experiences.
+                I'm Namit Pratap Singh, a backend-focused software engineer specializing in Java and 
+                Spring Boot. I design and build reliable APIs and microservices that power fast, 
+                scalable, and maintainable applications.
               </p>
               <p className="text-body leading-relaxed">
-                When I'm not coding, you'll find me exploring new technologies, playing games, 
-                or contributing to open-source projects. I believe in continuous learning and 
-                staying updated with the latest trends in web development.
+                My core strengths include backend architecture, event-driven systems with Kafka, 
+                resilient distributed services, and cloud-native deployment practices. I enjoy solving 
+                performance and reliability challenges across production systems.
               </p>
               
               <div className="grid grid-cols-2 gap-4 mt-8">
                 <div className="text-center p-4 bg-light rounded-lg">
-                  <div className="text-2xl font-bold text-primary">2+</div>
+                  <div className="text-2xl font-bold text-primary">3+</div>
                   <div className="text-sm text-gray-600">Years Experience</div>
                 </div>
                 <div className="text-center p-4 bg-light rounded-lg">
@@ -75,7 +75,7 @@ const About = () => {
                   Let's Connect
                 </a>
                 <a
-                  href="/resume.pdf"
+                  href="https://drive.google.com/file/d/1BRW-zwDK-Ae3H7zJj5xP5XXpeG1QuTQ8/view?usp=drivesdk"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 border-2 border-secondary text-secondary font-medium rounded-lg hover:bg-secondary hover:text-white transition-all duration-300"
