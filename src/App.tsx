@@ -1,16 +1,20 @@
-import { useEffect, useMemo, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
+  Activity,
   ArrowRight,
+  BellRing,
+  BrainCircuit,
   CheckCircle2,
   Command,
   Cpu,
+  Database,
   ExternalLink,
   GitBranch,
   Github,
   Mail,
   Radar,
-  Server,
+  ShieldCheck,
 } from 'lucide-react'
 
 type FlowNode = {
@@ -20,6 +24,7 @@ type FlowNode = {
   y: number
   detail: string
   stack: string[]
+  icon: ReactNode
 }
 
 type CaseStudy = {
@@ -37,55 +42,92 @@ type CapabilityCell = {
   proof: string
 }
 
+type FlowEdge = {
+  id: string
+  from: string
+  to: string
+  label: string
+  color: string
+}
+
+type FlowMode = 'normal' | 'peak' | 'incident'
+
 const flowNodes: FlowNode[] = [
   {
     id: 'gateway',
-    title: 'API Gateway',
-    x: 16,
+    title: 'Release API',
+    x: 21,
     y: 24,
-    detail: 'Unified entrypoint with auth checks, routing rules, and observability hooks.',
-    stack: ['Spring Cloud Gateway', 'JWT', 'Rate Limiting'],
+    detail: 'Entry API for Greenlight release-governance workflows with secure request handling and validations.',
+    stack: ['Java 17', 'Spring Boot 3.4', 'JWT'],
+    icon: <ShieldCheck size={13} />,
   },
   {
     id: 'orders',
-    title: 'Order Service',
-    x: 42,
+    title: 'Rule Engine',
+    x: 46,
     y: 20,
-    detail: 'Core orchestration logic for checkout, idempotency handling, and compensations.',
-    stack: ['Spring Boot', 'PostgreSQL', 'Redis'],
+    detail: 'Concurrent processing engine for quality-gate decisions across 1,000+ user stories.',
+    stack: ['ExecutorService', 'AtomicInteger', 'Concurrency'],
+    icon: <BrainCircuit size={13} />,
   },
   {
     id: 'events',
-    title: 'Event Stream',
+    title: 'Event Aggregator',
     x: 69,
     y: 47,
-    detail: 'Asynchronous event backbone for inventory, notifications, and analytics pipelines.',
-    stack: ['Kafka', 'Schema Registry', 'Retry DLQ'],
+    detail: 'Asynchronous event intake that consolidates multi-team notification traffic into actionable payloads.',
+    stack: ['Apache Kafka', 'Redis Streams', 'Threshold Rules'],
+    icon: <BellRing size={13} />,
   },
   {
     id: 'inventory',
-    title: 'Inventory',
-    x: 31,
+    title: 'Redis Buffer',
+    x: 34,
     y: 67,
-    detail: 'Reservation-first stock model to prevent over-selling under heavy load.',
-    stack: ['Spring Boot', 'Optimistic Locking', 'Redis'],
+    detail: 'Stateful buffering layer for validated events to minimize redundant downstream notifications.',
+    stack: ['Redis Streams', 'State Tracking', 'Deduplication'],
+    icon: <Database size={13} />,
   },
   {
     id: 'observability',
-    title: 'Observability',
+    title: 'Telemetry',
     x: 84,
     y: 14,
-    detail: 'Metrics, traces, and service-level dashboards connected to release workflows.',
+    detail: 'Cross-service metrics and traces to monitor quality-gate throughput and release health.',
     stack: ['Prometheus', 'Grafana', 'OpenTelemetry'],
+    icon: <Activity size={13} />,
   },
 ]
 
-const edges = [
-  ['gateway', 'orders'],
-  ['orders', 'events'],
-  ['orders', 'inventory'],
-  ['orders', 'observability'],
+const edges: FlowEdge[] = [
+  { id: 'e1', from: 'gateway', to: 'orders', label: 'Release request', color: '#6fd8cf' },
+  { id: 'e2', from: 'orders', to: 'events', label: 'Kafka publish', color: '#f2a65a' },
+  { id: 'e3', from: 'orders', to: 'inventory', label: 'Validated buffer', color: '#8edca0' },
+  { id: 'e4', from: 'orders', to: 'observability', label: 'Telemetry stream', color: '#9ec8ff' },
 ]
+
+const swimlanes = [
+  { id: 'l1', label: 'Entry', y: 9 },
+  { id: 'l2', label: 'Validation Core', y: 30 },
+  { id: 'l3', label: 'Event Delivery', y: 51 },
+  { id: 'l4', label: 'Platform Signals', y: 72 },
+]
+
+const flowModes: Record<FlowMode, { speed: number; note: string }> = {
+  normal: {
+    speed: 1,
+    note: 'Normal traffic profile with balanced throughput across services.',
+  },
+  peak: {
+    speed: 0.68,
+    note: 'Peak mode simulates burst traffic with faster event movement.',
+  },
+  incident: {
+    speed: 1.25,
+    note: 'Incident mode highlights degraded path behavior and slower flow.',
+  },
+}
 
 const studies: CaseStudy[] = [
   {
@@ -201,6 +243,8 @@ function App() {
   const [activeStudyId, setActiveStudyId] = useState(studies[0].id)
   const [activeCapabilityId, setActiveCapabilityId] = useState(0)
   const [isCommandOpen, setIsCommandOpen] = useState(false)
+  const [flowMode, setFlowMode] = useState<FlowMode>('normal')
+  const [activeEdgeId, setActiveEdgeId] = useState(edges[0].id)
 
   const activeNode = useMemo(
     () => flowNodes.find((node) => node.id === activeNodeId) ?? flowNodes[0],
@@ -213,6 +257,8 @@ function App() {
   )
 
   const activeCapability = capabilityGrid[activeCapabilityId] ?? capabilityGrid[0]
+  const activeEdge = edges.find((edge) => edge.id === activeEdgeId) ?? edges[0]
+  const modeConfig = flowModes[flowMode]
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -291,35 +337,76 @@ function App() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="v3-system-board"
             >
+              <div className="v3-flow-toolbar">
+                <div className="v3-flow-mode-group" role="tablist" aria-label="Flow mode selector">
+                  {(['normal', 'peak', 'incident'] as FlowMode[]).map((mode) => (
+                    <button
+                      type="button"
+                      key={mode}
+                      className={`v3-flow-mode ${flowMode === mode ? 'is-active' : ''}`}
+                      onClick={() => setFlowMode(mode)}
+                    >
+                      {mode}
+                    </button>
+                  ))}
+                </div>
+                <p>{modeConfig.note}</p>
+              </div>
+
               <div className="v3-system-grid">
+                {swimlanes.map((lane) => (
+                  <div key={lane.id} className="v3-lane" style={{ top: `${lane.y}%` }}>
+                    <span>{lane.label}</span>
+                  </div>
+                ))}
+
                 <svg className="v3-edge" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                   <defs>
-                    <linearGradient id="flow-grad" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#26d0ce" />
-                      <stop offset="100%" stopColor="#f2a65a" />
-                    </linearGradient>
+                    <marker id="flow-arrow" viewBox="0 0 10 10" refX="8.2" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8fd3ca" />
+                    </marker>
                   </defs>
-                  {edges.map(([from, to]) => {
-                    const start = flowNodes.find((node) => node.id === from)
-                    const end = flowNodes.find((node) => node.id === to)
+                  {edges.map((edge, index) => {
+                    const start = flowNodes.find((node) => node.id === edge.from)
+                    const end = flowNodes.find((node) => node.id === edge.to)
 
                     if (!start || !end) {
                       return null
                     }
 
-                    const controlX = (start.x + end.x) / 2
-                    const controlY = (start.y + end.y) / 2 - 7
+                    const dx = end.x - start.x
+                    const c1x = start.x + dx * 0.34
+                    const c2x = start.x + dx * 0.72
+                    const c1y = start.y + (start.y < end.y ? 0 : -5)
+                    const c2y = end.y + (start.y < end.y ? -6 : 0)
+                    const pathId = `flow-path-${edge.id}`
 
                     return (
-                      <path
-                        key={`${from}-${to}`}
-                        d={`M ${start.x} ${start.y} Q ${controlX} ${controlY} ${end.x} ${end.y}`}
-                        stroke="url(#flow-grad)"
-                        strokeWidth="0.8"
-                        strokeDasharray="2.2 2.2"
-                        strokeLinecap="round"
-                        fill="none"
-                      />
+                      <g key={edge.id}>
+                        <path
+                          id={pathId}
+                          d={`M ${start.x} ${start.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${end.x} ${end.y}`}
+                          stroke={flowMode === 'incident' ? '#f2a65a' : edge.color}
+                          strokeWidth={flowMode === 'peak' ? '1' : '0.8'}
+                          strokeDasharray="2.2 2.2"
+                          strokeLinecap="round"
+                          markerEnd="url(#flow-arrow)"
+                          opacity={activeEdgeId === edge.id ? 1 : 0.6}
+                          className="v3-edge-path"
+                          onMouseEnter={() => setActiveEdgeId(edge.id)}
+                          style={{ pointerEvents: 'stroke' }}
+                          fill="none"
+                        />
+                        <circle r="0.9" fill="#d6fff5" opacity="0.95">
+                          <animateMotion
+                            dur={`${(2.4 + index * 0.45) * modeConfig.speed}s`}
+                            repeatCount="indefinite"
+                            rotate="auto"
+                          >
+                            <mpath href={`#${pathId}`} />
+                          </animateMotion>
+                        </circle>
+                      </g>
                     )
                   })}
                 </svg>
@@ -334,14 +421,49 @@ function App() {
                     onFocus={() => setActiveNodeId(node.id)}
                     onClick={() => setActiveNodeId(node.id)}
                   >
+                    <i>{node.icon}</i>
                     <span>{node.title}</span>
                   </button>
                 ))}
               </div>
 
+              <div className="v3-system-mobile" aria-label="Architecture map for mobile screens">
+                {flowNodes.map((node) => (
+                  <button
+                    type="button"
+                    key={`mobile-${node.id}`}
+                    className={`v3-mobile-node ${activeNodeId === node.id ? 'is-active' : ''}`}
+                    onClick={() => setActiveNodeId(node.id)}
+                  >
+                    <i>{node.icon}</i>
+                    <strong>{node.title}</strong>
+                    <span>{node.stack[0]}</span>
+                  </button>
+                ))}
+
+                <div className="v3-mobile-flow-list">
+                  {edges.map((edge) => {
+                    const fromNode = flowNodes.find((node) => node.id === edge.from)
+                    const toNode = flowNodes.find((node) => node.id === edge.to)
+                    if (!fromNode || !toNode) {
+                      return null
+                    }
+
+                    return (
+                      <p key={`mobile-edge-${edge.id}`}>
+                        {fromNode.title} {'->'} {toNode.title} | {edge.label}
+                      </p>
+                    )
+                  })}
+                </div>
+              </div>
+
               <div className="v3-node-panel">
                 <h3>{activeNode.title}</h3>
                 <p>{activeNode.detail}</p>
+                <p className="v3-edge-note">
+                  Active Flow: <strong>{activeEdge.label}</strong>
+                </p>
                 <div>
                   {activeNode.stack.map((item) => (
                     <span key={item} className="v3-pill">

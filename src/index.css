@@ -187,6 +187,44 @@
   padding: 1rem;
 }
 
+.v3-flow-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-bottom: 0.8rem;
+}
+
+.v3-flow-mode-group {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 999px;
+  padding: 0.2rem;
+  background: rgba(8, 15, 19, 0.58);
+}
+
+.v3-flow-mode {
+  text-transform: capitalize;
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.72rem;
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--ink-body);
+}
+
+.v3-flow-mode.is-active {
+  color: #051113;
+  background: linear-gradient(135deg, #7be2d7, #2bbdc0);
+}
+
+.v3-flow-toolbar p {
+  font-size: 0.76rem;
+  color: var(--ink-body);
+  font-family: 'IBM Plex Mono', monospace;
+}
+
 .v3-system-grid {
   position: relative;
   border-radius: 0.85rem;
@@ -196,6 +234,29 @@
   background-image: linear-gradient(rgba(236, 245, 243, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(236, 245, 243, 0.03) 1px, transparent 1px);
   background-size: 30px 30px;
+}
+
+.v3-lane {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  border-top: 1px dashed rgba(143, 211, 202, 0.17);
+  z-index: 1;
+}
+
+.v3-lane span {
+  position: absolute;
+  left: 0.75rem;
+  top: -0.65rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.08em;
+  color: rgba(168, 186, 191, 0.72);
+  padding: 0.08rem 0.35rem;
+  border-radius: 999px;
+  background: rgba(7, 15, 20, 0.72);
+  border: 1px solid rgba(236, 245, 243, 0.08);
+  z-index: 4;
 }
 
 .v3-edge {
@@ -213,7 +274,7 @@
   transform: translate(-50%, -50%);
   border: 1px solid rgba(38, 208, 206, 0.45);
   border-radius: 999px;
-  padding: 0.45rem 0.8rem;
+  padding: 0.4rem 0.75rem;
   background: rgba(8, 17, 21, 0.9);
   color: var(--ink-strong);
   font-family: 'IBM Plex Mono', monospace;
@@ -221,6 +282,16 @@
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   z-index: 2;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+}
+
+.v3-node i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(143, 211, 202, 0.92);
 }
 
 .v3-node.is-active {
@@ -245,6 +316,79 @@
 .v3-node-panel p {
   color: var(--ink-body);
   margin-bottom: 0.9rem;
+}
+
+.v3-edge-note {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.73rem;
+  margin-bottom: 0.8rem;
+  color: #c4ddd7;
+}
+
+.v3-edge-note strong {
+  color: var(--accent-amber);
+  font-weight: 600;
+}
+
+.v3-edge-path {
+  transition: opacity 0.25s ease;
+}
+
+.v3-system-mobile {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.v3-mobile-node {
+  text-align: left;
+  border-radius: 0.72rem;
+  border: 1px solid var(--stroke-soft);
+  padding: 0.65rem;
+  background: rgba(8, 17, 21, 0.75);
+}
+
+.v3-mobile-node i {
+  display: inline-flex;
+  color: rgba(143, 211, 202, 0.92);
+  margin-bottom: 0.25rem;
+}
+
+.v3-mobile-node strong {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 0.25rem;
+  font-size: 0.88rem;
+}
+
+.v3-mobile-node span {
+  color: var(--ink-body);
+  font-size: 0.72rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.v3-mobile-node.is-active {
+  border-color: rgba(242, 166, 90, 0.75);
+  box-shadow: 0 0 0 1px rgba(242, 166, 90, 0.15);
+}
+
+.v3-mobile-flow-list {
+  grid-column: 1 / -1;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 0.72rem;
+  background: rgba(6, 12, 16, 0.8);
+  padding: 0.65rem;
+}
+
+.v3-mobile-flow-list p {
+  color: var(--ink-body);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.69rem;
+  line-height: 1.5;
+}
+
+.v3-mobile-flow-list p:not(:last-child) {
+  margin-bottom: 0.35rem;
 }
 
 .v3-pill {
@@ -517,7 +661,12 @@
   }
 
   .v3-system-grid {
+    display: block;
     min-height: 21.5rem;
+  }
+
+  .v3-system-mobile {
+    display: none;
   }
 
   .v3-studies {
@@ -546,5 +695,19 @@
   .v3-contact-actions {
     justify-content: flex-end;
     margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .v3-flow-toolbar {
+    margin-bottom: 0.65rem;
+  }
+
+  .v3-system-grid {
+    display: none;
+  }
+
+  .v3-node-panel {
+    margin-top: 0.75rem;
   }
 }
