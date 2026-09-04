@@ -1,20 +1,18 @@
-# 🚀 Personal Portfolio - Namit Pratap Singh
+# Personal Portfolio - Namit Pratap Singh
 
-A modern, responsive personal portfolio website showcasing my skills, projects, and experience as a Full Stack Developer. Built with React, TypeScript, and Tailwind CSS.
+A modern portfolio focused on backend engineering case studies, Java systems work, and production-facing architecture decisions. Built with React, TypeScript, and Tailwind CSS.
 
 ## 🌐 Live Demo
 
 **[Visit Portfolio](https://baznamit.github.io/Personal-Portfolio/)**
 
-## ✨ Features
+## Features
 
-- 🎨 **Modern Design** - Clean, professional UI with smooth animations
-- 📱 **Fully Responsive** - Optimized for all device sizes
-- ⚡ **Fast Performance** - Built with Vite for lightning-fast loading
-- 🎬 **Smooth Animations** - Powered by Framer Motion
-- 🌙 **Interactive Elements** - Engaging user experience with hover effects
-- 📧 **Contact Form** - Functional contact form for inquiries
-- 🔧 **TypeScript** - Full type safety throughout the application
+- Professional backend-engineer positioning instead of a generic template portfolio
+- Interactive system walkthrough for the Greenlight release flow
+- Case studies with role, scope, architecture, and measurable outcomes
+- Responsive layout with direct resume and contact access
+- Smooth motion and strong typography tuned for a technical audience
 
 ## 🛠️ Built With
 
@@ -36,21 +34,24 @@ A modern, responsive personal portfolio website showcasing my skills, projects, 
 - **GitHub Pages** - Hosted on GitHub Pages
 - **GitHub Actions** - Automated deployment pipeline
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 src/
-├── components/          # React components
-│   ├── About.tsx       # About me section
-│   ├── Contact.tsx     # Contact form & info
-│   ├── Footer.tsx      # Footer component
-│   ├── Header.tsx      # Navigation header
-│   ├── Hero.tsx        # Hero/landing section
-│   ├── Projects.tsx    # Projects showcase
-│   └── Skills.tsx      # Skills & technologies
+├── components/          # Rendered portfolio sections
+│   ├── Capabilities.tsx
+│   ├── CaseStudies.tsx
+│   ├── CommandPalette.tsx
+│   ├── Contact.tsx
+│   ├── Footer.tsx
+│   ├── Header.tsx
+│   ├── Hero.tsx
+│   └── Timeline.tsx
+├── data/
+│   └── portfolio.tsx   # Portfolio content and typed data
 ├── utils/
 │   └── assets.ts       # Asset path utilities
-├── App.tsx             # Main app component
+├── App.tsx             # App shell and state wiring
 ├── main.tsx            # App entry point
 └── index.css           # Global styles
 ```
@@ -93,17 +94,13 @@ src/
 - `npm run type-check` - TypeScript type checking
 - `npm run deploy` - Deploy to GitHub Pages
 
-## 🎨 Customization
+## Customization
 
 ### Colors & Styling
 The project uses Tailwind CSS with custom configuration in `tailwind.config.js`. Modify the theme to customize colors, fonts, and spacing.
 
 ### Content
-Update the component files in `src/components/` to customize:
-- Personal information in `About.tsx`
-- Skills and technologies in `Skills.tsx`
-- Project showcase in `Projects.tsx`
-- Contact information in `Contact.tsx`
+Update `src/data/portfolio.tsx` to customize portfolio copy, case studies, links, and system-flow content.
 
 ### Assets
 Add your images to `public/Pics/` and update the asset references using the `getAssetPath` utility.
@@ -128,12 +125,12 @@ The portfolio is fully responsive and optimized for:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Author
+## Author
 
 **Namit Pratap Singh** ([@baznamit](https://github.com/baznamit))
 - 📧 Email: namit.singh1269@gmail.com
 - 🐙 GitHub: [@baznamit](https://github.com/baznamit)
-- 💼 LinkedIn: [Connect with me](https://www.linkedin.com/)
+- 💼 LinkedIn: [Connect with me](https://linkedin.com/in/baznamit)
 - 🐦 Twitter: [@baznamit1269](https://twitter.com/baznamit1269)
 
 ## 🙏 Acknowledgments
@@ -143,6 +140,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Animations powered by [Framer Motion](https://www.framer.com/motion/)
 - Built with [Vite](https://vitejs.dev/) and [React](https://reactjs.org/)
 
----
-
-⭐ **Star this repository if you found it helpful!**
