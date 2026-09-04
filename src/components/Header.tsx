@@ -1,90 +1,87 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Command, FileText, Menu, X } from 'lucide-react'
+import type { NavItem } from '../data/portfolio'
 
-const Header = () => {
+type HeaderProps = {
+  navItems: NavItem[]
+  resumeUrl: string
+  emailUrl: string
+  onOpenCommand: () => void
+}
+
+const Header = ({ navItems, resumeUrl, emailUrl, onOpenCommand }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false)
+      }
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const navItems = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' },
-  ]
+  const handleMenuLinkClick = () => {
+    setIsMenuOpen(false)
+  }
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-effect shadow-lg' : 'bg-transparent'
-      }`}
-    >
-      <div className="container-max section-padding">
-        <div className="flex items-center justify-between py-4">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-heading text-primary font-bold"
-          >
-            Namit
-          </motion.div>
+    <header className="v3-header">
+      <div className="container-max section-padding v3-header-inner">
+        <a href="#home" className="v3-brand">
+          Namit Singh
+        </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <motion.a
-                key={item.href}
-                href={item.href}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium"
-              >
-                {item.label}
-              </motion.a>
-            ))}
-          </nav>
+        <nav className="v3-nav" aria-label="Primary">
+          {navItems.map((item) => (
+            <a key={item.href} href={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
-          {/* Mobile Menu Button */}
+        <div className="v3-header-actions">
+          <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="v3-header-secondary">
+            <FileText size={15} />
+            Resume
+          </a>
+          <button type="button" className="v3-command" onClick={onOpenCommand}>
+            <Command size={16} />
+            <span>Command</span>
+          </button>
           <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+            type="button"
+            className="v3-mobile-toggle"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle navigation"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <motion.nav
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden pb-4"
-          >
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="block py-2 text-gray-700 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
-          </motion.nav>
-        )}
       </div>
-    </motion.header>
+
+      {isMenuOpen && (
+        <div className="container-max section-padding v3-mobile-panel">
+          {navItems.map((item) => (
+            <a key={item.href} href={item.href} className="v3-mobile-link" onClick={handleMenuLinkClick}>
+              {item.label}
+            </a>
+          ))}
+          <div className="v3-mobile-cta-row">
+            <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="v3-btn v3-btn-ghost">
+              <FileText size={15} />
+              Resume
+            </a>
+            <a href={emailUrl} className="v3-btn v3-btn-primary">
+              Contact
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
   )
 }
 
