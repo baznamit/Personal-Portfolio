@@ -84,6 +84,21 @@
   color: var(--ink-strong);
 }
 
+.v3-shell main {
+  position: relative;
+  counter-reset: portfolio-section;
+}
+
+.v3-shell main::before {
+  content: '';
+  position: absolute;
+  inset: 0 max(10px, calc((100% - 1200px) / 2));
+  border-inline: 1px solid var(--stroke-soft);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .v3-header {
   position: sticky;
   top: 0;
@@ -435,9 +450,34 @@ html.theme-transition::view-transition-new(theme-toggle) {
 }
 
 .v3-system-board {
+  position: relative;
   min-width: 0;
   padding-top: 1rem;
   border-top: 1px solid var(--stroke-soft);
+}
+
+.v3-system-board::before,
+.v3-system-board::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--accent-cyan);
+  border-style: solid;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.v3-system-board::before {
+  top: -8px;
+  left: -8px;
+  border-width: 1px 0 0 1px;
+}
+
+.v3-system-board::after {
+  right: -8px;
+  bottom: -8px;
+  border-width: 0 1px 1px 0;
 }
 
 .v3-system-intro {
@@ -1085,8 +1125,35 @@ html.theme-transition::view-transition-new(theme-toggle) {
 }
 
 .v3-section {
+  counter-increment: portfolio-section;
   padding-top: 4.2rem;
-  padding-bottom: 1rem;
+  padding-bottom: 3rem;
+  border-top: 1px solid var(--stroke-soft);
+}
+
+.v3-section:nth-of-type(odd) {
+  background: color-mix(in srgb, var(--bg-subtle) 65%, var(--bg-canvas));
+}
+
+.v3-section-head {
+  position: relative;
+  padding-left: 5.75rem;
+}
+
+.v3-section-head::before {
+  content: counter(portfolio-section, decimal-leading-zero) / '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4.5rem;
+  border-right: 1px solid var(--stroke-soft);
+  color: color-mix(in srgb, var(--accent-cyan) 28%, var(--stroke-soft));
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0;
+  pointer-events: none;
 }
 
 .v3-section-head p {
@@ -1731,6 +1798,15 @@ html.theme-transition::view-transition-new(theme-toggle) {
 }
 
 @media (max-width: 767px) {
+  .v3-section-head {
+    padding-left: 4rem;
+  }
+
+  .v3-section-head::before {
+    width: 3.25rem;
+    font-size: 2rem;
+  }
+
   .v3-system-intro p {
     font-size: 0.9rem;
   }
