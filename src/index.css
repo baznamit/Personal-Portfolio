@@ -164,6 +164,67 @@
   background: var(--accent-soft);
 }
 
+html.theme-transition .v3-theme-toggle {
+  view-transition-name: theme-toggle;
+}
+
+html.theme-transition::view-transition {
+  pointer-events: none;
+}
+
+html.theme-transition::view-transition-old(root),
+html.theme-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.theme-transition::view-transition-new(root) {
+  animation: theme-reveal 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.theme-transition::view-transition-old(theme-toggle) {
+  animation: theme-toggle-out 120ms ease-out both;
+}
+
+html.theme-transition::view-transition-new(theme-toggle) {
+  animation: theme-toggle-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-origin-x) var(--theme-origin-y));
+  }
+  to {
+    clip-path: circle(var(--theme-reveal-radius) at var(--theme-origin-x) var(--theme-origin-y));
+  }
+}
+
+@keyframes theme-toggle-out {
+  to {
+    opacity: 0;
+    transform: rotate(45deg) scale(0.8);
+  }
+}
+
+@keyframes theme-toggle-in {
+  from {
+    opacity: 0;
+    transform: rotate(-60deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition::view-transition-group(*),
+  html.theme-transition::view-transition-old(*),
+  html.theme-transition::view-transition-new(*) {
+    animation: none;
+  }
+}
+
 .v3-header-secondary,
 .v3-mobile-toggle {
   display: inline-flex;

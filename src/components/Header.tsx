@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { type MouseEvent, useEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { Command, FileText, Menu, Moon, Sun, X } from 'lucide-react'
 import type { NavItem } from '../data/portfolio'
 
@@ -11,6 +12,7 @@ type HeaderProps = {
 
 const Header = ({ navItems, resumeUrl, emailUrl, onOpenCommand }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const isThemeTransitioning = useRef(false)
   const [preference, setPreference] = useState<'light' | 'dark' | null>(() => {
     try {
       const saved = localStorage.getItem('portfolio-theme')
@@ -45,13 +47,52 @@ const Header = ({ navItems, resumeUrl, emailUrl, onOpenCommand }: HeaderProps) =
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#14171A' : '#F7F8FA')
   }, [theme])
 
-  const toggleTheme = () => {
+  const toggleTheme = (event: MouseEvent<HTMLButtonElement>) => {
+    if (isThemeTransitioning.current) return
+
     const nextTheme = theme === 'dark' ? 'light' : 'dark'
-    setPreference(nextTheme)
-    try {
-      localStorage.setItem('portfolio-theme', nextTheme)
-    } catch {
+    const updateTheme = () => {
+      flushSync(() => setPreference(nextTheme))
+      try {
+        localStorage.setItem('portfolio-theme', nextTheme)
+      } catch {
+        return
+      }
+    }
+    const transitionDocument = document as Document & {
+      startViewTransition?: (update: () => void) => { finished: Promise<void> }
+    }
+
+    if (!transitionDocument.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      updateTheme()
       return
+    }
+
+    const bounds = event.currentTarget.getBoundingClientRect()
+    const originX = bounds.left + bounds.width / 2
+    const originY = bounds.top + bounds.height / 2
+    const radius = Math.hypot(Math.max(originX, innerWidth - originX), Math.max(originY, innerHeight - originY))
+    const root = document.documentElement
+    root.style.setProperty('--theme-origin-x', `${originX}px`)
+    root.style.setProperty('--theme-origin-y', `${originY}px`)
+    root.style.setProperty('--theme-reveal-radius', `${radius}px`)
+    root.classList.add('theme-transition')
+    isThemeTransitioning.current = true
+
+    const finishTransition = () => {
+      root.classList.remove('theme-transition')
+      root.style.removeProperty('--theme-origin-x')
+      root.style.removeProperty('--theme-origin-y')
+      root.style.removeProperty('--theme-reveal-radius')
+      isThemeTransitioning.current = false
+    }
+
+    try {
+      const transition = transitionDocument.startViewTransition(updateTheme)
+      void transition.finished.then(finishTransition, finishTransition)
+    } catch {
+      finishTransition()
+      updateTheme()
     }
   }
 
