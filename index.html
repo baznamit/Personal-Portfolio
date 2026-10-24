@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F7F8FA" />
+    <script>
+      (() => {
+        let preference;
+        try {
+          preference = localStorage.getItem('portfolio-theme');
+        } catch {}
+        const theme = preference === 'light' || preference === 'dark'
+          ? preference
+          : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#14171A' : '#F7F8FA';
+      })();
+    </script>
     <meta name="description" content="Backend-focused software engineer building Java microservices, event-driven systems, and cloud-ready delivery platforms." />
     <meta name="keywords" content="Namit Pratap Singh, Java Developer, Spring Boot, Microservices, Kafka, Backend Engineer, Portfolio" />
     <meta name="author" content="Namit Pratap Singh" />
