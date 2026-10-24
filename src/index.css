@@ -103,9 +103,13 @@
 
 .v3-brand {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   white-space: nowrap;
+}
+
+.v3-brand-mark {
+  color: var(--accent-cyan);
 }
 
 .v3-nav {
@@ -226,14 +230,16 @@
 
 .v3-hero h1 {
   font-size: 2.5rem;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: 0;
   margin-bottom: 1rem;
 }
 
-.v3-hero h1 span {
-  display: block;
-  margin-top: 0.75rem;
+.v3-hero .v3-hero-stack {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  margin-bottom: 1rem;
   color: var(--accent-cyan);
   font-size: 1.25rem;
   line-height: 1.4;
@@ -393,10 +399,10 @@
 
   background: var(--accent-soft);
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0;
 
   color: var(--accent-cyan);
 }
@@ -404,13 +410,13 @@
 .v3-system-intro h3 {
   margin-bottom: 0.3rem;
 
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
 
   color: var(--accent-cyan);
 
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0;
 }
 
 .v3-system-intro p {
@@ -458,12 +464,12 @@
 
   grid-template-columns:
     minmax(0, 1fr)
-    82px
+    96px
     minmax(0, 1fr);
 
   grid-template-rows:
     auto
-    40px
+    48px
     auto;
 
   grid-template-areas:
@@ -508,7 +514,7 @@
 .v3-arch-node {
   width: 100%;
   min-width: 0;
-  min-height: 92px;
+  min-height: 108px;
 
   padding: 0.65rem 0.75rem;
 
@@ -567,7 +573,7 @@
 
 .v3-arch-index {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
 
   color: var(--ink-body);
 }
@@ -583,8 +589,9 @@
 
   font-family: 'Space Grotesk', sans-serif;
 
-  font-size: 0.93rem;
-  line-height: 1.2;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
 
   color: var(--ink-strong);
 }
@@ -595,8 +602,8 @@
   margin-top: 0.35rem;
 
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.68rem;
-  line-height: 1.35;
+  font-size: 0.75rem;
+  line-height: 1.5;
 
   color: var(--ink-body);
 
@@ -629,9 +636,10 @@
 .v3-flow-connector > span:first-child {
   margin-bottom: 0.4rem;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  line-height: 1.2;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
 
   text-align: center;
 
@@ -713,7 +721,7 @@
   grid-area: kafka;
 
   width: 100%;
-  height: 40px;
+  height: 48px;
 
   padding: 0;
 
@@ -770,9 +778,10 @@
 
   background: var(--bg-surface);
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  line-height: 1;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
 
   white-space: nowrap;
 }
@@ -857,7 +866,7 @@
 .v3-observability-copy strong {
   display: block;
 
-  font-size: 0.82rem;
+  font-size: 0.9375rem;
 }
 
 .v3-observability-copy span {
@@ -865,7 +874,7 @@
 
   margin-top: 0.15rem;
 
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   line-height: 1.5;
   color: var(--ink-body);
 }
@@ -906,9 +915,10 @@
   display: block;
   margin-bottom: 0.25rem;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.1em;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0;
   text-transform: uppercase;
 
   color: var(--accent-cyan);
@@ -925,8 +935,9 @@
   align-items: center;
   gap: 0.35rem;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
 
   color: var(--accent-lime);
 }
@@ -969,10 +980,11 @@
 .v3-panel-meta span {
   display: block;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
 
   color: var(--ink-body);
 }
@@ -1006,7 +1018,7 @@
   border-radius: 999px;
 
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
 
   color: var(--ink-body);
 }
@@ -1672,6 +1684,10 @@
 }
 
 @media (max-width: 479px) {
+  .v3-brand {
+    font-size: 1.125rem;
+  }
+
   .v3-grid {
     grid-template-columns: minmax(0, 1fr);
   }

@@ -47,7 +47,8 @@ const Hero = ({
           className="v3-hero-copy"
         >
           <p className="v3-kicker">Software Engineer at TCS</p>
-          <h1>Namit Pratap Singh<span>Java. Spring. React.</span></h1>
+          <h1>Namit Singh<span className="v3-brand-mark" aria-hidden="true">.</span></h1>
+          <p className="v3-hero-stack">Java. Spring. React.</p>
           <p className="v3-hero-summary">
             I build reliable backend systems and full-stack applications, with a focus on
             fast APIs, event-driven workflows, and production reliability.

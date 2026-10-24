@@ -74,7 +74,7 @@ const Header = ({ navItems, resumeUrl, emailUrl, onOpenCommand }: HeaderProps) =
     <header className="v3-header">
       <div className="container-max section-padding v3-header-inner">
         <a href="#home" className="v3-brand">
-          Namit Singh
+          Namit Singh<span className="v3-brand-mark" aria-hidden="true">.</span>
         </a>
 
         <nav className="v3-nav" aria-label="Primary">
