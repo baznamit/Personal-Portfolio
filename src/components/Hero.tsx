@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowDown, ArrowLeft, ArrowRight, ExternalLink, FileText, Mail } from 'lucide-react'
+import { ArrowDown, ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, FileText, Mail } from 'lucide-react'
 import type { FlowEdge, FlowNode } from '../data/portfolio'
 
 type HeroProps = {
@@ -46,20 +46,22 @@ const Hero = ({
           transition={{ duration: 0.65 }}
           className="v3-hero-copy"
         >
-          <p className="v3-kicker">Backend Engineer | Java + Cloud Systems</p>
-          <h1>From API design to production reliability, I create backend architectures teams can trust.</h1>
-          <p>
-            Software Engineer at TCS focused on Java microservices, event-driven pipelines,
-            concurrency, and quality-governed delivery systems used by multiple engineering teams.
+          <p className="v3-kicker">Software Engineer at TCS</p>
+          <h1>Namit Singh<span className="v3-brand-mark" aria-hidden="true">.</span></h1>
+          <p className="v3-hero-stack">Java. Spring. React.</p>
+          <p className="v3-hero-summary">
+            I build reliable backend systems and full-stack applications, with a focus on
+            fast APIs, event-driven workflows, and production reliability.
           </p>
 
-          <div className="v3-signal-row" aria-label="Professional highlights">
+          <ul className="v3-hero-highlights" aria-label="Professional highlights">
             {heroSignals.map((item) => (
-              <span key={item} className="v3-signal">
+              <li key={item}>
+                <CheckCircle2 size={16} aria-hidden="true" />
                 {item}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <div className="v3-hero-actions">
             <a href="#case-studies" className="v3-btn v3-btn-primary">
@@ -105,13 +107,6 @@ const Hero = ({
                 Interactive
               </span>
             </div>
-          </div>
-
-          <div className="v3-flow-toolbar">
-            <p>
-              Select a component to explore its responsibility,
-              implementation and engineering impact.
-            </p>
           </div>
 
           <div
@@ -242,37 +237,31 @@ const Hero = ({
             </div>
 
             <div className="v3-observability">
-              <div className="v3-observability-label">
-                <span className="v3-observability-line" />
-                <span>Metrics &amp; traces</span>
-              </div>
-
               <button
                 type="button"
                 className={`v3-observability-node ${
                   activeNodeId === 'observability' ? 'is-active' : ''
                 }`}
-                onClick={() => {
-                  onNodeSelect('observability')
-                  onEdgeSelect('e4')
-                }}
+                onClick={() => onNodeSelect('observability')}
                 aria-pressed={activeNodeId === 'observability'}
+                aria-controls="architecture-component-details"
+                title="View pipeline observability details"
               >
-                <span className="v3-observability-icon">
+                <span className="v3-observability-icon" aria-hidden="true">
                   {telemetryNode.icon}
                 </span>
 
                 <span className="v3-observability-copy">
-                  <strong>Observability</strong>
-                  <span>Prometheus · Grafana · OpenTelemetry</span>
+                  <strong>Pipeline observability</strong>
+                  <span>Throughput, failures &amp; release health</span>
                 </span>
 
-                <span className="v3-observability-status">Monitoring</span>
+                <ArrowRight size={16} className="v3-observability-arrow" aria-hidden="true" />
               </button>
             </div>
           </div>
 
-          <div className="v3-node-panel" aria-live="polite">
+          <div id="architecture-component-details" className="v3-node-panel" aria-live="polite">
             <div className="v3-node-panel-header">
               <div>
                 <span className="v3-panel-eyebrow">Selected component</span>
@@ -289,23 +278,7 @@ const Hero = ({
               {activeNode.detail}
             </p>
 
-            <div
-              className={`v3-panel-meta ${
-                !activeNode.impact ? 'is-single' : ''
-              }`}
-            >
-              <div>
-                <span>Primary technology</span>
-                <strong>{activeNode.stack[0]}</strong>
-              </div>
-
-              {activeNode.impact && (
-                <div className="v3-panel-impact">
-                  <span>Engineering impact</span>
-                  <strong>{activeNode.impact}</strong>
-                </div>
-              )}
-            </div>
+            {activeNode.impact && <p className="v3-hero-impact">{activeNode.impact}</p>}
 
             <div className="v3-panel-stack">
               {activeNode.stack.map((item) => (
