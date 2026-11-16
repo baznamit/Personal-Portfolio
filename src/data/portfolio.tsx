@@ -68,7 +68,7 @@ export type CommandItem = {
   icon: ReactNode
 }
 
-export const resumeUrl = 'https://drive.google.com/file/d/1BRW-zwDK-Ae3H7zJj5xP5XXpeG1QuTQ8/view?usp=drivesdk'
+export const resumeUrl = 'https://drive.google.com/file/d/1s3EodMwqfkAzBeieUeZHD1Rsz1ervURH/view?usp=drivesdk'
 export const githubUrl = 'https://github.com/baznamit'
 export const linkedInUrl = 'https://linkedin.com/in/baznamit'
 export const emailUrl = 'mailto:namit.singh1269@gmail.com'
